@@ -1,0 +1,13 @@
+
+
+
+<form action="/type/type-edit" method="POST" onsubmit="return confirm('You sure you want to update this type?');" class="border p-4 rounded bg-light">
+    <input type="hidden" id="id" name="id" value="{{type.id}}">
+    
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name:</label>
+        <input type="text" id="Name" name="Name" class="form-control" value="{{type.Name}}" required>
+    </div>
+    <a href="/type/type-mant" class="btn btn-info">Go back</a>
+    <button type="submit" class="btn btn-primary">Update type</button>
+</form>

@@ -1,0 +1,10 @@
+<form action="/region/region-edit" method="POST" onsubmit="return confirm('You sure you want to update this region?');" class="border p-4 rounded bg-light">
+    <input type="hidden" id="id" name="id" value="{{region.id}}">
+    
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name:</label>
+        <input type="text" id="Name" name="Name" class="form-control" value="{{region.Name}}" required>
+    </div>
+    <a href="/region/region-mant" class="btn btn-info">Go back</a>
+    <button type="submit" class="btn btn-primary">Update region</button>
+</form>
