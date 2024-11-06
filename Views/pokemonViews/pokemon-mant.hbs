@@ -1,0 +1,29 @@
+<a href="/pokemon/pokemon-add" class="btn btn-success mb-3">New Pokemon</a>
+
+{{#if IsEmpty}}
+    <h1 class="text-center">There is no pokemons</h1>
+{{else}}
+    <div class="row">
+        {{#each pokemons}}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="/series/detail-series/{{this.id}}">
+                        <img src="{{ImgUrl}}" alt="{{Name}}" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.Name}}</h5>
+                        <p class="card-text">{{this.region.dataValues.Name}}</p>
+                        <p class="card-text">{{this.type.dataValues.Name}}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <form action="/pokemon/pokemon-delete" style="display: inline;" method="POST" onsubmit="return confirm('You sure you want to delete the series?');">
+                            <input type="hidden" name="id" value="{{this.id}}"/>
+                            <button type="submit" class="btn btn-danger me-2">Delete</button>
+                        </form>
+                        <a href="/pokemon/pokemon-edit/{{this.id}}" class="btn btn-info">Edit</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}

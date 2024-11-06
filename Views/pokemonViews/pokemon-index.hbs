@@ -1,0 +1,46 @@
+<form action="/pokemon/filter" method="POST">
+<label for="name">Name:<input type="text" id="name" name="name"></label>
+
+    <div class="mb-3">
+        <label for="type" class="form-label">type:</label>
+        <select id="type" name="type" class="form-select" >
+            <option value="">Choose a type to filter</option> 
+            {{#each types}}
+                <option value="{{this.id}}">{{this.Name}}</option>
+            {{/each}}
+        </select>
+    </div>
+   <div class="mb-3">
+        <label for="region" class="form-label">Region:</label>
+        <select id="region" name="region" class="form-select" >
+            <option value="">Choose a region to filter</option> 
+            {{#each regions}}
+                <option value="{{this.id}}">{{this.Name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <button type="submit">Filter genre</button>
+</form>
+{{#if IsEmpty}}
+    <h1 class="text-center">There is no pokemons</h1>
+{{else}}
+    <div class="row">
+        {{#each pokemons}}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{this.ImgUrl}}" alt="{{name}}" class="card-img-top">
+               
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.Name}}</h5>
+                        <p class="card-text">{{this.region.dataValues.Name}}</p>
+                        <p class="card-text">{{this.type.dataValues.Name}}</p>
+                    </div>
+                        <div class="card-footer text-center">
+                        {{!-- <a href="/series/detail-series/{{this.id}}" class="btn btn-info">Detail</a> --}}
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}

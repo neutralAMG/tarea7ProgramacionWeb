@@ -10,7 +10,9 @@ const modelRelationshipConfig = require("./Utils/modelRelentionshipConfig")
 
 
 
-app.engine("hbs",engine({
+app.engine("hbs",engine({helpers:{
+ equals: (v1,v2) => v1===v2
+},
 layoutsDir: "views/layouts",
 defaultLayout:"main-layout",
 extname:"hbs"
