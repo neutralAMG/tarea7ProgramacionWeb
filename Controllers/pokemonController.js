@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const Pokemons = require("../Models/pokemon");
 const pokemonModel = require("../Models/pokemon");
 const RegionsModel = require("../Models/region");
@@ -30,6 +31,55 @@ exports.GetAllPokemonIndex = (req,res,next) =>{
 
 }
 
+
+exports.PostPokemonfilterName = (req,res,next) =>{
+   const name = req.body.name;
+    RegionsModel.findAll().then((r) =>{   
+      TypesModel.findAll().then((t) =>{
+       pokemonModel.findAll({where:{Name:name},include:[{model: RegionsModel, as:"region"}, {model:TypesModel, as:"type"}]})
+       .then((result) => {
+        //  if(pokemons.length === 0)
+        //     return res.redirect(PokemonMantainenceRout)
+       const pokemons = result.map((p) => p.dataValues)
+
+       console.log(pokemons)
+       return res.render("pokemonViews/pokemon-index", {
+            pokemons: pokemons,
+            regions: r.map((r) => r.dataValues),
+            types:  t.map((t) => t.dataValues),
+            IsEmpty: pokemons.length === 0
+          })
+       }).catch((err) => {
+        console.log(err)
+           });
+         })
+    })
+
+}
+exports.PostPokemonFilter = (req,res,next) =>{
+    const {region} = req.body;
+
+    RegionsModel.findAll().then((r) =>{
+      TypesModel.findAll().then((t) =>{
+       pokemonModel.findAll(
+        {where:{ RegionId: region
+    },include:[{model: RegionsModel, as:"region"}, {model:TypesModel, as:"type"}]})
+       .then((result) => {
+       const pokemons = result.map((p) => p.dataValues)
+       return res.render("pokemonViews/pokemon-index", {
+            pokemons: pokemons,
+            regions: r.map((r) => r.dataValues),
+            types:  t.map((t) => t.dataValues),
+            IsEmpty: pokemons.length === 0
+          })
+       }).catch((err) => {
+        console.log(err)
+           });
+         })
+    })
+
+
+}
 exports.GetAllPokemonMant = (req,res,next) =>{
     pokemonModel.findAll({include:[{model: RegionsModel, as:"region"}, {model:TypesModel, as:"type"}]})
     .then((result) => {

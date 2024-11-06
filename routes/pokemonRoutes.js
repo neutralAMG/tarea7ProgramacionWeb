@@ -8,5 +8,7 @@ router.post("/pokemon-add", pokemonController.PostAddPokemon)
 router.get("/pokemon-edit/:id", pokemonController.GetEditPokemon)
 router.post("/pokemon-edit", pokemonController.PostEditPokemon)
 router.post("/pokemon-delete", pokemonController.PostDeletePokemon)
+router.post("/pokemon-filterName", pokemonController.PostPokemonfilterName)
+router.post("/pokemon-filter", pokemonController.PostPokemonFilter)
 
 module.exports = router;

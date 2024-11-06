@@ -1,7 +1,22 @@
-<form action="/pokemon/filter" method="POST">
-<label for="name">Name:<input type="text" id="name" name="name"></label>
+<h1 class="display-1 text-center mt-5">POKEDEX</h1>
+<div class="row align-items-start">
 
-    <div class="mb-3">
+<div class="card text-center col-4 mb-5">
+
+    <div class="card-header">
+        <h1 class="card-header">Filters</h1>
+    </div>
+
+<div class="card-body">
+  <form action="/pokemon/pokemon-filterName" method="POST">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" class="from-control" >
+     <button class="btn btn-outline-info" type="submit">filter</button>
+  </form>
+
+
+  <form action="/pokemon/pokemon-filter" method="POST">
+    {{!-- <div class="mb-3">
         <label for="type" class="form-label">type:</label>
         <select id="type" name="type" class="form-select" >
             <option value="">Choose a type to filter</option> 
@@ -9,19 +24,30 @@
                 <option value="{{this.id}}">{{this.Name}}</option>
             {{/each}}
         </select>
-    </div>
-   <div class="mb-3">
+    </div> --}}
+     <div class="mb-3">
         <label for="region" class="form-label">Region:</label>
-        <select id="region" name="region" class="form-select" >
+        <select id="region" class="from-select"  name="region" class="from-select" >
             <option value="">Choose a region to filter</option> 
             {{#each regions}}
                 <option value="{{this.id}}">{{this.Name}}</option>
             {{/each}}
         </select>
-    </div>
+        <button class="btn btn-outline-info" type="submit">Filter</button>
+      </div>
+      
+</form> 
+</div>
+<div class="card-footer">
+  <a class="btn btn-outline-info" href="/pokemon/pokemon-index">Unfilter</a>
+</div>
+</div>
 
-    <button type="submit">Filter genre</button>
-</form>
+
+
+
+<div class="col-8">
+  
 {{#if IsEmpty}}
     <h1 class="text-center">There is no pokemons</h1>
 {{else}}
@@ -32,15 +58,16 @@
                     <img src="{{this.ImgUrl}}" alt="{{name}}" class="card-img-top">
                
                     <div class="card-body">
-                        <h5 class="card-title">{{this.Name}}</h5>
-                        <p class="card-text">{{this.region.dataValues.Name}}</p>
-                        <p class="card-text">{{this.type.dataValues.Name}}</p>
-                    </div>
-                        <div class="card-footer text-center">
-                        {{!-- <a href="/series/detail-series/{{this.id}}" class="btn btn-info">Detail</a> --}}
+                        <h5 class="card-title text-center text-primary">{{this.Name}}</h5>
+                        <div class="d-flex justify-content-between">
+                            <p class="card-text text-muted"><strong>Region:</strong> {{this.region.dataValues.Name}}</p>
+                             <p class="card-text text-muted"><strong>Type:</strong> {{this.type.dataValues.Name}}</p>
+                        </div> 
                     </div>
                 </div>
             </div>
         {{/each}}
     </div>
 {{/if}}
+</div>
+</div>

@@ -1,3 +1,4 @@
+<h1 class="display-1 text-center mt-5">SAVE POKEMON </h1>
 <form action="/pokemon/pokemon-add" method="POST" onsubmit="return confirm('You sure you want to save this pokemon?');" class="border p-4 rounded bg-light">
     
     <div class="mb-3">
@@ -12,7 +13,7 @@
 
     <div class="mb-3">
         <label for="TypeId" class="form-label">Type:</label>
-        <select name="TypeId" id="TypeId" class="form-select">
+        <select name="TypeId" id="TypeId" class="form-select" required>
             <option value="">Select a type</option>
             {{#each types}}
             <option value="{{this.id}}">{{this.Name}}</option>
@@ -22,7 +23,7 @@
 
     <div class="mb-3">
         <label for="RegionId" class="form-label">Region:</label>
-        <select name="RegionId" id="RegionId" class="form-select">
+        <select name="RegionId" id="RegionId" class="form-select" required>
             <option value="">Select a Region</option>
             {{#each regions}}
             <option value="{{this.id}}">{{this.Name}}</option>
